@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  flightaware:
+    image: ghcr.io/sdr-enthusiasts/docker-piaware:latest
+    container_name: flightaware
+    restart: always
+    depends_on:
+      - readsb
+    ports:
+      - 9090:8080
+    environment:
+      - TZ=${TIMEZONE}
+      - LAT=${LAT}
+      - LONG=${LONG}
+      - FEEDER_ID=${FLIGHTAWARE}
+      - RECEIVER_TYPE=relay
+      - BEASTHOST=readsb
+    tmpfs:
+      - /run:exec,size=64M
+      - /var/log
+    network_mode: readsb

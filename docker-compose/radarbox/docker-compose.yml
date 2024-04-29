@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  radarbox:
+    image: ghcr.io/sdr-enthusiasts/docker-radarbox:latest
+    tty: true
+    container_name: radarbox
+    restart: always
+    depends_on:
+      - readsb
+    environment:
+      - TZ=${TIMEZONE}
+      - BEASTHOST=readsb
+      - LAT=${LAT}
+      - LONG=${LONG}
+      - ALT=${ALT}
+      - SHARING_KEY=${RADARBOX}
+    tmpfs:
+      - /run:exec,size=64M
+      - /var/log
+    network_mode: readsb

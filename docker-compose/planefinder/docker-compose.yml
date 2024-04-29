@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  planefinder:
+    image: ghcr.io/sdr-enthusiasts/docker-planefinder:latest
+    tty: true
+    container_name: planefinder
+    restart: always
+    ports:
+      - 30053:30053
+    environment:
+      - TZ=${TIMEZONE}
+      - BEASTHOST=readsb
+      - LAT=${LAT}
+      - LONG=${LONG}
+      - SHARECODE=${PLANEFINDER}
+    tmpfs:
+      - /run:exec,size=64M
+      - /var/log/pfclient
+    network_mode: readsb

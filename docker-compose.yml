@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+     readsb:
+        extends:
+            file: ./docker-compose/readsb/docker-compose.yml
+            service: readsb
+     flightairmap:
+        extends:
+            file: ./docker-compose/flightairmap/docker-compose.yml
+            service: flightairmap
+     flightaware:
+        extends:
+            file: ./docker-compose/flightaware/docker-compose.yml
+            service: flightaware
+     flightradar24:
+        extends:
+            file: ./docker-compose/flightradar24/docker-compose.yml
+            service: flightradar24
+     radarbox:
+        extends:
+            file: ./docker-compose/radarbox/docker-compose.yml
+            service: radarbox
+     planefinder:
+        extends:
+            file: ./docker-compose/planefinder/docker-compose.yml
+            service: planefinder
+
+
+volumes:
+  flightairmap_db:
+  flightairmap_webapp:
+  readsbpb_rrd:
+  readsbpb_autogain:
+
+
+
+ 

@@ -1,0 +1,21 @@
+version: '2.0'
+
+services:
+  flightairmap:
+    image: mikenye/flightairmap:latest
+    tty: true
+    container_name: flightairmap
+    restart: always
+    ports:
+      - 8030:80
+    environment:
+      - TZ=${TIMEZONE}
+      - BASESTATIONHOST=readsb
+      - FAM_INSTALLPASSWORD="password"
+    volumes:
+      - flightairmap_db:/var/lib/mysql
+      - flightairmap_webapp:/var/www/flightairmap
+
+volumes:
+  flightairmap_db:
+  flightairmap_webapp:

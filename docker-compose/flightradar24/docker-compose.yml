@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  flightradar24:
+    image: ghcr.io/sdr-enthusiasts/docker-flightradar24:latest
+    tty: true
+    container_name: flightradar24
+    restart: always
+    depends_on:
+      - readsb
+    ports:
+      - 8754:8754
+    environment:
+      - TZ= ${TIMEZONE}
+      - BEASTHOST=readsb
+      - MLAT=yes
+      - FR24KEY=${FLIGHTRADAR24}
+    tmpfs:
+      - /var/log
+    network_mode: readsb
